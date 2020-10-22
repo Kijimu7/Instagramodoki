@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSubmit;
     private File photoFile ;
     public String photoFileName = "photo.jpg";
+    public Button btnLogOut;
 
 
 
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnLogOut = findViewById(R.id.btnLogout);
+
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+                goLoginActivity();
+                Toast.makeText(MainActivity.this, "logout", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 
@@ -80,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
                 savePost(description, currentUser, photoFile);
             }
         });
+    }
+    private void goLoginActivity(){
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void launchCamera() {
@@ -173,4 +190,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+
+
+
+
+    public void logOut() {
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+        } else {
+            // show the signup or login screen
+        }
+
+
+
+    }
+
+
+
 }
