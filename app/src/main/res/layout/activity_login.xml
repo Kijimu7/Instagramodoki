@@ -3,33 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".LoginActivity">
+
 
     <EditText
-        android:id="@+id/etDescription"
+        android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:ems="10"
-        android:hint="Description" />
+        tools:text="username" />
 
-    <Button
-        android:id="@+id/btnCaptureImage"
+    <EditText
+        android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Take Picture" />
-
-    <ImageView
-        android:id="@+id/ivPostImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword"
+        />
 
     <Button
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit" />
+        android:layout_weight="1"
+        android:text="Login" />
+
+
 </LinearLayout>
+
+
+
+
