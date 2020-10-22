@@ -1,4 +1,4 @@
-package com.example.simpleinstagram;
+package com.example.Instagramodoki;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;

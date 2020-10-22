@@ -1,4 +1,4 @@
-package com.example.simpleinstagram;
+package com.example.Instagramodoki;
 
 import org.junit.Test;
 
