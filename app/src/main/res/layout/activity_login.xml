@@ -9,12 +9,26 @@
     tools:context=".LoginActivity">
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:fontFamily="cursive"
+        android:text="Instagram"
+        android:textAlignment="center"
+        android:textColor="#090909"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:layout_weight="1"
         android:ems="10"
+        android:hint="username"
         tools:text="username" />
 
     <EditText
