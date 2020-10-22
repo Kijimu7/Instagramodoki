@@ -77,20 +77,29 @@ private void goMainActivity(){
 }
 
 public void signupUser(){
-    ParseUser user = new ParseUser();
-    user.setUsername("my name");
-    user.setPassword("my pass");
-    user.setEmail("email@example.com");
+    final String username = etUsername.getText().toString();
+    final String password = etPassword.getText().toString();
+    if(username.isEmpty() || password.isEmpty()){
+        Toast.makeText(this, "Field cannot be empty", Toast.LENGTH_SHORT).show();
+        return;
+    }
 
-// other fields can be set just like with ParseObject
-    user.put("phone", "650-253-0000");
+    ParseUser user = new ParseUser();
+    user.setUsername(username);
+    user.setPassword(password);
+
+
 
     user.signUpInBackground(new SignUpCallback() {
         public void done(ParseException e) {
             if (e == null) {
                 // Hooray! Let them use the app now.
+                loginUser(username, password);
             } else {
                 // Sign up didn't succeed. Look at the ParseException
+                Toast.makeText(LoginActivity.this, "SignUp error", Toast.LENGTH_SHORT).show();
+                etUsername.setText("");
+                etPassword.setText("");
                 // to figure out what went wrong
             }
         }
