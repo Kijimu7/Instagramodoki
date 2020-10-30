@@ -1,5 +1,6 @@
 package com.example.Instagramodoki.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,11 +8,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.Instagramodoki.Post;
 import com.example.Instagramodoki.PostsAdapter;
@@ -35,6 +39,8 @@ public class PostFragment extends Fragment {
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
+
+    private SwipeRefreshLayout swipeContainer;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,7 +80,11 @@ public class PostFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,13 +99,33 @@ public class PostFragment extends Fragment {
         rvPosts = view.findViewById(R.id.rvPosts);
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
-
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPost();
 
+
+        // Adding Listener
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchTimelineAsync(0);
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
     }
-        protected void queryPost(){
+
+    private void fetchTimelineAsync(int i){
+        adapter.clear();
+        queryPost();
+        swipeContainer.setRefreshing(false);
+    }
+        protected void queryPost() {
             ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
             query.include(Post.KEY_USER);
             query.setLimit(20);
@@ -104,11 +134,11 @@ public class PostFragment extends Fragment {
             query.findInBackground(new FindCallback<Post>() {
                 @Override
                 public void done(List<Post> posts, ParseException e) {
-                    if(e !=null){
+                    if (e != null) {
                         Log.e(TAG, "Issue with getting posts", e);
                         return;
                     }
-                    for (Post post : posts){
+                    for (Post post : posts) {
                         Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                     }
                     allPosts.addAll(posts);
@@ -116,9 +146,9 @@ public class PostFragment extends Fragment {
                 }
             });
 
-
-
         }
+
+
 
 
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
@@ -51,12 +53,17 @@ public class MainActivity extends AppCompatActivity {
     public String photoFileName = "photo.jpg";
     public Button btnLogOut;
 
+    SwipeRefreshLayout swipeLayout;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+
 
         etDescription = findViewById(R.id.etDescription);
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
@@ -104,24 +111,21 @@ public class MainActivity extends AppCompatActivity {
 //                savePost(description, currentUser, photoFile);
 //            }
 //        });
-
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+//
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 Fragment fragment = new Fragment();
-                switch (item.getItemId()) {
+                switch (menuItem.getItemId()) {
                     case R.id.action_home:
-
                         fragment = new PostFragment();
                         break;
                     case R.id.action_compose:
-
                         fragment = new ComposeFragment();
                         break;
                     case R.id.action_profile:
-
                         fragment = new ProfileFragment();
                     default:
                         break;
@@ -133,11 +137,11 @@ public class MainActivity extends AppCompatActivity {
         // Set default selection
         bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
-    private void goLoginActivity(){
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
-        finish();
-    }
+//    private void goLoginActivity(){
+//        Intent i = new Intent(this, LoginActivity.class);
+//        startActivity(i);
+//        finish();
+//    }
 
 //    private void launchCamera() {
 //// create Intent to take a picture and return control to the calling application
