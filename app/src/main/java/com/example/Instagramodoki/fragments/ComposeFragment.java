@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import static android.app.Activity.RESULT_OK;
 
 import com.example.Instagramodoki.LoginActivity;
 import com.example.Instagramodoki.MainActivity;
@@ -55,9 +56,9 @@ public class ComposeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private int RESULT_OK;
+//    private String mParam1;
+//    private String mParam2;
+//    private int RESULT_OK;
 
     public ComposeFragment() {
         // Required empty public constructor

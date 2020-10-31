@@ -14,25 +14,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@+id/bottomNavigation"
-    />
+    >
 
-
-
-
-
-        <ListView
-
-            android:id="@+id/listView"
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content">
-
-
-
-        </ListView>
-
-
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+</FrameLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -40,7 +28,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/menu_bottom_navigation" />
+        app:menu="@menu/menu_bottom_navigation"
+        app:itemBackground="@color/colorAccent"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+
+        />
+
+
 
 
 </RelativeLayout>
